@@ -1,0 +1,41 @@
+.hangman {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  &__image {
+    max-width: 500px;
+    max-height: 500px;
+  }
+}
+
+.hidden-word {
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3em 0;
+  &__letter {
+    height: 0.4rem;
+    width: 3rem;
+    background-color: $color-black;
+    margin: auto 0.5em;
+    &--found {
+      font-size: 2em;
+      margin: auto 0.5em;
+    }
+  }
+}
+
+.letter {
+  @include letter-button($color-green, pointer);
+  &--clicked {
+    @include letter-button($color-orange, default);
+  }
+  &__container {
+    height: 8rem;
+    display: grid;
+    grid: repeat(2, 3rem) / auto-flow 3rem;
+    align-content: center;
+    justify-content: center;
+  }
+}

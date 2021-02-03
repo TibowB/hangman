@@ -1,0 +1,22 @@
+@mixin outline-button {
+  border: 0.2rem solid #776871;
+  background-color: transparent;
+  width: 10rem;
+  height: 4rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5em;
+  border-radius: 20px;
+}
+
+@mixin letter-button($color, $cursor) {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1em;
+  border-radius: 5px;
+  color: $color-secondary;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: $cursor;
+  background-color: $color;
+}

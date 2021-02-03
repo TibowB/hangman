@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  height: 4rem;
+  background-color: $color-primary;
+  align-items: center;
+  justify-content: center;
+  &__title {
+    font-weight: 600;
+    font-size: 2rem;
+    color: $color-secondary;
+    text-shadow: 0.1rem 0.1rem rgba(#000, 0.3);
+  }
+}

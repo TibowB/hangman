@@ -1,0 +1,11 @@
+.message {
+  font-weight: 400;
+  font-size: 2em;
+  margin: auto;
+  text-align: center;
+  &__container {
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+  }
+}
