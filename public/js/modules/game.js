@@ -1,5 +1,7 @@
 let count = 1;
 
+// Check if letter in word
+
 export function checkLetterInWord(letter, word, hiddenWord) {
   var letterMatch = word.includes(letter);
   if (letterMatch) {
@@ -19,6 +21,8 @@ export function checkLetterInWord(letter, word, hiddenWord) {
   return count;
 }
 
+// Get all indices of submitted letter.
+
 function getAllIndices(letter, word) {
   var indices = [];
   var index = word.indexOf(letter);
@@ -28,6 +32,8 @@ function getAllIndices(letter, word) {
   }
   return indices;
 }
+
+// Change the DOM elements of the hidden word.
 
 function changeDOMHiddenWord(letter, indices) {
   for (let i of indices) {
@@ -46,6 +52,8 @@ function changeDOMHiddenWord(letter, indices) {
   }
 }
 
+// Change hidden word variable.
+
 function changeHiddenWord(letter, indices, hiddenWord) {
   for (let i of indices) {
     hiddenWord[i] = letter;
@@ -53,19 +61,27 @@ function changeHiddenWord(letter, indices, hiddenWord) {
   return hiddenWord;
 }
 
+// Change hangman image
+
 function changeHangmanImage(number) {
   var hangmanContainer = document.querySelector(".hangman__image");
   hangmanContainer.setAttribute("src", `./public/img/GUESS_${number}.svg`);
 }
 
+// Check if word and hidden word are similar.
+
 function arrayEquals(word, hiddenWord) {
   return word.every((value, index) => value === hiddenWord[index]);
 }
+
+// If user wins.
 
 function playerWins(word) {
   word = word.join("");
   document.location.href = `/game-over.html?status=winner&word=${word}`;
 }
+
+// If user loses.
 
 function playerLoses(word) {
   word = word.join("");
