@@ -1,2 +1,2 @@
 # hangman
-Hangman game mage with Vite &amp; Typescript
+Hangman game made with Vite &amp; Typescript
