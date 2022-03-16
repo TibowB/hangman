@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <g id="GUESS_2" transform="translate(-660 -315)">
+    <rect id="BORDERS" width="600" height="450" transform="translate(660 315)" fill="none"/>
+    <rect id="GUESS_2-2" data-name="GUESS_2" width="3" height="324" transform="translate(826 441)" fill="#6c6c6c"/>
+    <g id="GUESS_1" transform="translate(741 762)" fill="#6c6c6c" stroke="#707070" stroke-width="1">
+      <rect width="173" height="3" stroke="none"/>
+      <rect x="0.5" y="0.5" width="172" height="2" fill="none"/>
+    </g>
+  </g>
+</svg>
