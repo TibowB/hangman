@@ -55,7 +55,7 @@ function changeHiddenWord(letter, indices, hiddenWord) {
 
 function changeHangmanImage(number) {
   var hangmanContainer = document.querySelector(".hangman__image");
-  hangmanContainer.setAttribute("src", `./public/img/GUESS_${number}.svg`);
+  hangmanContainer.setAttribute("src", `img/GUESS_${number}.svg`);
 }
 
 function arrayEquals(word, hiddenWord) {
@@ -64,10 +64,10 @@ function arrayEquals(word, hiddenWord) {
 
 function playerWins(word) {
   word = word.join("");
-  document.location.href = `/hangman/game-over.html?status=winner&word=${word}`;
+  document.location.href = `game-over.html?status=winner&word=${word}`;
 }
 
 function playerLoses(word) {
   word = word.join("");
-  document.location.href = `/hangman/game-over.html?status=loser&word=${word}`;
+  document.location.href = `game-over.html?status=loser&word=${word}`;
 }
