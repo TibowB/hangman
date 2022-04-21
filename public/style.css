@@ -5,12 +5,15 @@
   padding: 0;
   box-sizing: inherit;
 }
+
 body {
   background-color: #cbd1c7;
 }
+
 body {
   font-family: "Montserrat", sans-serif;
 }
+
 .header {
   display: flex;
   height: 4rem;
@@ -18,12 +21,14 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .header__title {
   font-weight: 600;
   font-size: 2rem;
   color: #ebf1e9;
   text-shadow: 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
 }
+
 .play {
   display: flex;
   width: 80%;
@@ -32,6 +37,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .play__button {
   border: 0.2rem solid #776871;
   background-color: transparent;
@@ -41,25 +47,31 @@ body {
   font-size: 1.5em;
   border-radius: 20px;
 }
+
 .play__button:hover {
   background-color: #776871;
 }
+
 .play__link {
   color: #776871;
   text-decoration: none;
 }
+
 .play__link:hover {
   color: #ebf1e9;
 }
+
 .hangman {
   display: flex;
   margin: auto;
   justify-content: center;
 }
+
 .hangman__image {
   max-width: 500px;
   max-height: 500px;
 }
+
 .hidden-word {
   height: 4rem;
   width: 100%;
@@ -67,16 +79,19 @@ body {
   justify-content: center;
   margin: 3em 0;
 }
+
 .hidden-word__letter {
   height: 0.4rem;
   width: 3rem;
   background-color: #0f0e0e;
   margin: auto 0.5em;
 }
+
 .hidden-word__letter--found {
   font-size: 2em;
   margin: auto 0.5em;
 }
+
 .letter {
   height: 2rem;
   width: 2rem;
@@ -89,6 +104,7 @@ body {
   cursor: pointer;
   background-color: green;
 }
+
 .letter--clicked {
   height: 2rem;
   width: 2rem;
@@ -101,6 +117,7 @@ body {
   cursor: default;
   background-color: orange;
 }
+
 .letter__container {
   height: 8rem;
   display: grid;
@@ -108,12 +125,14 @@ body {
   align-content: center;
   justify-content: center;
 }
+
 .message {
   font-weight: 400;
   font-size: 2em;
   margin: auto;
   text-align: center;
 }
+
 .message__container {
   height: 5rem;
   display: flex;

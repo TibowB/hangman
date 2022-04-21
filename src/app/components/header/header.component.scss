@@ -1,0 +1,14 @@
+.header {
+  display: flex;
+  height: 4rem;
+  background-color: #776871;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    font-weight: 600;
+    font-size: 2rem;
+    color: #ebf1e9;
+    text-shadow: 0.1rem 0.1rem rgba(0, 0, 0, 0.3);
+  }
+}
