@@ -1,1 +1,9 @@
-<p>hangman works!</p>
+<div class="hangman">
+    <img class="hangman__image" [src]="hangmanImagePath" alt="hangman" />
+    <div class="hidden-word">
+        <div class="hidden-word__letter" *ngFor="let _ of hiddenWord"></div>
+    </div>
+    <div class="letter__container">
+        <div class="letter" *ngFor="let letter of alphabet" (click)="onClickSubmitLetter(letter)">{{ letter }}</div>
+    </div>
+</div>

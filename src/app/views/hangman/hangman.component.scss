@@ -1,0 +1,66 @@
+.hangman {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+
+  &__image {
+    margin: auto;
+    max-width: 500px;
+    max-height: 500px;
+  }
+}
+
+.hidden-word {
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 3em 0;
+
+  &__letter {
+    height: 0.4rem;
+    width: 3rem;
+    background-color: #0f0e0e;
+    margin: auto 0.5em;
+
+    &--found {
+      font-size: 2em;
+      margin: auto 0.5em;
+    }
+  }
+}
+
+.letter {
+  height: 2rem;
+  width: 2rem;
+  font-size: 1em;
+  border-radius: 5px;
+  color: #ebf1e9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: green;
+
+  &--clicked {
+    height: 2rem;
+    width: 2rem;
+    font-size: 1em;
+    border-radius: 5px;
+    color: #ebf1e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    background-color: orange;
+  }
+
+  &__container {
+    height: 8rem;
+    display: grid;
+    grid: repeat(2, 3rem) / auto-flow 3rem;
+    align-content: center;
+    justify-content: center;
+  }
+}

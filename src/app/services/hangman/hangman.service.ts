@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { AlphabetService } from '../alphabet/alphabet.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HangmanService {
+  constructor(private alphabetService: AlphabetService) {}
 
-  constructor() { }
+  getAlphabet(): string[] {
+    return this.alphabetService.getAlphabet();
+  }
 }
