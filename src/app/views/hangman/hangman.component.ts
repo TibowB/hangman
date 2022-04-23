@@ -13,6 +13,9 @@ export class HangmanComponent implements OnInit, OnDestroy {
   hangmanImagePath: string = '';
   try: number = 0;
 
+  isLetterInWord: boolean = false;
+  isHiddenWordFound: boolean = false;
+
   constructor(private hangmanService: HangmanService) {}
 
   ngOnInit(): void {
@@ -23,7 +26,6 @@ export class HangmanComponent implements OnInit, OnDestroy {
     );
     this.hangmanService.word.subscribe((value) => (this.word = value));
     this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
-    console.log(this.word);
   }
 
   ngOnDestroy(): void {
@@ -33,15 +35,17 @@ export class HangmanComponent implements OnInit, OnDestroy {
   }
 
   onClickSubmitLetter(event: Event, letter: string) {
-    this.hiddenWord = this.hangmanService.hiddenWord.value;
+    // this.hiddenWord = this.hangmanService.hiddenWord.value;
     (event.target as HTMLElement).classList.replace(
       'letter',
       'letter--clicked'
     );
     this.try++;
-    const isLetterInWord = this.hangmanService.isLetterInWord(letter);
-    if (!isLetterInWord) {
+    this.isLetterInWord = this.hangmanService.isLetterInWord(letter);
+    this.isHiddenWordFound = this.hangmanService.hiddenWordIsFound();
+    if (!this.isLetterInWord) {
       this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
     }
+    console.log(this.isHiddenWordFound);
   }
 }
