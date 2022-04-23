@@ -4,6 +4,7 @@
         <div class="hidden-word__letter" *ngFor="let _ of hiddenWord"></div>
     </div>
     <div class="letter__container">
-        <div class="letter" *ngFor="let letter of alphabet" (click)="onClickSubmitLetter(letter)">{{ letter }}</div>
+        <div class="letter" *ngFor="let letter of alphabet" (click)="onClickSubmitLetter($event, letter)">{{ letter }}
+        </div>
     </div>
 </div>

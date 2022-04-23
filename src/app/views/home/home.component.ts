@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HangmanService } from '../../services/hangman/hangman.service';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private hangmanService: HangmanService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onClickStartGameOnePlayer() {
+    this.hangmanService.setRandomWord();
     this.router.navigate(['hangman']);
   }
 

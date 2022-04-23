@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HangmanService } from '../../services/hangman/hangman.service';
 
 @Component({
@@ -6,20 +6,37 @@ import { HangmanService } from '../../services/hangman/hangman.service';
   templateUrl: './hangman.component.html',
   styleUrls: ['./hangman.component.scss'],
 })
-export class HangmanComponent implements OnInit {
+export class HangmanComponent implements OnInit, OnDestroy {
   hiddenWord: string[] = [];
+  word: string[] = [];
   alphabet: string[] = [];
   hangmanImagePath: string = '';
-  try: number = 1;
+  try: number = 0;
 
   constructor(private hangmanService: HangmanService) {}
 
   ngOnInit(): void {
-    this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
+    this.hangmanService.prepareGame();
     this.alphabet = this.hangmanService.getAlphabet();
-    this.hiddenWord = ['_', '_', '_', '_', '_'];
+    this.hiddenWord = this.hangmanService.hiddenWord;
+    this.word = this.hangmanService.word;
+    this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
   }
-  onClickSubmitLetter(letter: string) {
+
+  ngOnDestroy(): void {
+    this.hiddenWord = [];
+    this.word = [];
+    this.hangmanService.removeWord();
+  }
+
+  onClickSubmitLetter(event: Event, letter: string) {
+    (event.target as HTMLElement).classList.replace(
+      'letter',
+      'letter--clicked'
+    );
+    this.try++;
+    this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
+    console.log(this.try);
     console.log(letter);
   }
 }
