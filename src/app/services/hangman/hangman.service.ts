@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { AlphabetService } from '../alphabet/alphabet.service';
 import { WordService } from '../word/word.service';
 
@@ -6,8 +7,10 @@ import { WordService } from '../word/word.service';
   providedIn: 'root',
 })
 export class HangmanService {
-  private _word: string[] = [];
-  private _hiddenWord: string[] = [];
+  public word: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public hiddenWord: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
+    []
+  );
 
   constructor(
     private alphabetService: AlphabetService,
@@ -15,34 +18,25 @@ export class HangmanService {
   ) {}
 
   prepareGame(): void {
-    this._word = this.wordService.getRandomWord();
-    this._hiddenWord = this.wordService.getHiddenWord(this._word);
+    this.word.next(this.wordService.getRandomWord());
+    this.hiddenWord.next(this.wordService.getHiddenWord(this.word.value));
   }
 
   getAlphabet(): string[] {
     return this.alphabetService.getAlphabet();
   }
 
-  setRandomWord(): void {
-    this._word = this.wordService.getRandomWord();
-  }
-
   removeWord(): void {
-    this._word = [];
-    this._hiddenWord = [];
+    this.word.next([]);
+    this.hiddenWord.next([]);
   }
 
-  public get word(): string[] {
-    return this._word;
-  }
-  public set word(value: string[]) {
-    this._word = value;
-  }
-
-  public get hiddenWord(): string[] {
-    return this._hiddenWord;
-  }
-  public set hiddenWord(value: string[]) {
-    this._hiddenWord = value;
+  isLetterInWord(letter: string): boolean {
+    if (this.word.value.includes(letter)) {
+      const letterIndex = this.word.value.indexOf(letter);
+      this.hiddenWord.value[letterIndex] = letter;
+      return true;
+    }
+    return false;
   }
 }

@@ -18,9 +18,12 @@ export class HangmanComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.hangmanService.prepareGame();
     this.alphabet = this.hangmanService.getAlphabet();
-    this.hiddenWord = this.hangmanService.hiddenWord;
-    this.word = this.hangmanService.word;
+    this.hangmanService.hiddenWord.subscribe(
+      (value) => (this.hiddenWord = value)
+    );
+    this.hangmanService.word.subscribe((value) => (this.word = value));
     this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
+    console.log(this.word);
   }
 
   ngOnDestroy(): void {
@@ -30,13 +33,15 @@ export class HangmanComponent implements OnInit, OnDestroy {
   }
 
   onClickSubmitLetter(event: Event, letter: string) {
+    this.hiddenWord = this.hangmanService.hiddenWord.value;
     (event.target as HTMLElement).classList.replace(
       'letter',
       'letter--clicked'
     );
     this.try++;
-    this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
-    console.log(this.try);
-    console.log(letter);
+    const isLetterInWord = this.hangmanService.isLetterInWord(letter);
+    if (!isLetterInWord) {
+      this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
+    }
   }
 }

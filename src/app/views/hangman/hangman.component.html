@@ -1,7 +1,7 @@
 <div class="hangman">
     <img class="hangman__image" [src]="hangmanImagePath" alt="hangman" />
     <div class="hidden-word">
-        <div class="hidden-word__letter" *ngFor="let _ of hiddenWord"></div>
+        <div class="hidden-word__letter" *ngFor="let hiddenLetter of hiddenWord">{{ hiddenLetter}}</div>
     </div>
     <div class="letter__container">
         <div class="letter" *ngFor="let letter of alphabet" (click)="onClickSubmitLetter($event, letter)">{{ letter }}

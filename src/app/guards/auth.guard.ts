@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.hangmanService.word.length !== 0) {
+    if (this.hangmanService.word.value.length !== 0) {
       return true;
     }
 
