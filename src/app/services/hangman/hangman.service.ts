@@ -41,9 +41,6 @@ export class HangmanService {
   }
 
   hiddenWordIsFound(): boolean {
-    return (
-      this.word.value.toString().replaceAll(',', '') ===
-      this.hiddenWord.value.toString().replaceAll(',', '')
-    );
+    return this.word.value.join('') === this.hiddenWord.value.join('');
   }
 }
