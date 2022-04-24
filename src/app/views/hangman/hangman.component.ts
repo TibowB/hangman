@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { HangmanService } from '../../services/hangman/hangman.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class HangmanComponent implements OnInit, OnDestroy {
   isLetterInWord: boolean = false;
   isHiddenWordFound: boolean = false;
 
-  constructor(private hangmanService: HangmanService) {}
+  constructor(private hangmanService: HangmanService, private router: Router) {}
 
   ngOnInit(): void {
     this.hangmanService.prepareGame();
@@ -28,11 +29,7 @@ export class HangmanComponent implements OnInit, OnDestroy {
     this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
   }
 
-  ngOnDestroy(): void {
-    this.hiddenWord = [];
-    this.word = [];
-    this.hangmanService.removeWord();
-  }
+  ngOnDestroy(): void {}
 
   onClickSubmitLetter(event: Event, letter: string) {
     // this.hiddenWord = this.hangmanService.hiddenWord.value;
@@ -40,12 +37,17 @@ export class HangmanComponent implements OnInit, OnDestroy {
       'letter',
       'letter--clicked'
     );
+
     this.try++;
     this.isLetterInWord = this.hangmanService.isLetterInWord(letter);
     this.isHiddenWordFound = this.hangmanService.hiddenWordIsFound();
+
+    if (this.isHiddenWordFound) {
+      this.router.navigateByUrl('result');
+    }
+
     if (!this.isLetterInWord) {
       this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
     }
-    console.log(this.isHiddenWordFound);
   }
 }

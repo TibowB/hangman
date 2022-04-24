@@ -7,6 +7,8 @@ import { HomeComponent } from './views/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { HangmanComponent } from './views/hangman/hangman.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ResultComponent } from './views/result/result.component';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,9 @@ import { HangmanComponent } from './views/hangman/hangman.component';
     HeaderComponent,
     ButtonComponent,
     HangmanComponent,
+    ResultComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })

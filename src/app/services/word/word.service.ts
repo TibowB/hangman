@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+// import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WordService {
+  // private randomWordApiUrl = 'https://random-word-api.herokuapp.com/word';
   words: string[] = ['cat', 'dog', 'fish', 'cow'];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   getRandomWord(): string[] {
+    // return this.http.get(this.randomWordApiUrl);
     return this.words[Math.floor(Math.random() * this.words.length)]
       .toUpperCase()
       .split('');
@@ -16,5 +20,9 @@ export class WordService {
 
   getHiddenWord(word: string[]): string[] {
     return word.map(() => '_');
+  }
+
+  getWordAsString(word: string[]): string {
+    return word.join('');
   }
 }

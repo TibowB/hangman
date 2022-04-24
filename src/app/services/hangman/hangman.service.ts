@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { AlphabetService } from '../alphabet/alphabet.service';
 import { WordService } from '../word/word.service';
@@ -11,6 +12,7 @@ export class HangmanService {
   public hiddenWord: BehaviorSubject<string[]> = new BehaviorSubject<string[]>(
     []
   );
+  public tries: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(
     private alphabetService: AlphabetService,
@@ -26,12 +28,21 @@ export class HangmanService {
     return this.alphabetService.getAlphabet();
   }
 
+  getWordAsString(): string {
+    return this.wordService.getWordAsString(this.word.value);
+  }
+
+  getTries(): number {
+    return this.tries.value;
+  }
+
   removeWord(): void {
     this.word.next([]);
     this.hiddenWord.next([]);
   }
 
   isLetterInWord(letter: string): boolean {
+    this.tries.next(this.tries.value + 1);
     if (this.word.value.includes(letter)) {
       const letterIndex = this.word.value.indexOf(letter);
       this.hiddenWord.value[letterIndex] = letter;
