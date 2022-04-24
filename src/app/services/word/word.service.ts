@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 // import { Observable } from 'rxjs';
+import { IWordService } from '../../interfaces/IWordService';
 
 @Injectable({
   providedIn: 'root',
 })
-export class WordService {
+export class WordService implements IWordService {
   // private randomWordApiUrl = 'https://random-word-api.herokuapp.com/word';
   words: string[] = ['cat', 'dog', 'fish', 'cow'];
 
