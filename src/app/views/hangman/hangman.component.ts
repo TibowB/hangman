@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HangmanService } from '../../services/hangman/hangman.service';
+import { AlphabetService } from '../../services/alphabet/alphabet.service';
 
 @Component({
   selector: 'app-hangman',
@@ -12,21 +13,23 @@ export class HangmanComponent implements OnInit, OnDestroy {
   word: string[] = [];
   alphabet: string[] = [];
   hangmanImagePath: string = '';
-  try: number = 0;
+  tries: number = 0;
 
-  isLetterInWord: boolean = false;
-  isHiddenWordFound: boolean = false;
-
-  constructor(private hangmanService: HangmanService, private router: Router) {}
+  constructor(
+    private alphabetService: AlphabetService,
+    private hangmanService: HangmanService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.hangmanService.prepareGame();
-    this.alphabet = this.hangmanService.getAlphabet();
-    this.hangmanService.hiddenWord.subscribe(
-      (value) => (this.hiddenWord = value)
+    this.alphabet = this.alphabetService.getAlphabet();
+    this.hangmanService.game.subscribe(
+      (game) => (this.hiddenWord = game.hiddenWord)
     );
-    this.hangmanService.word.subscribe((value) => (this.word = value));
-    this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
+    this.hangmanService.game.subscribe((game) => (this.word = game.word));
+    this.hangmanService.game.subscribe((game) => (this.tries = game.tries));
+    this.setImagePath();
   }
 
   ngOnDestroy(): void {}
@@ -38,16 +41,19 @@ export class HangmanComponent implements OnInit, OnDestroy {
       'letter--clicked'
     );
 
-    this.try++;
-    this.isLetterInWord = this.hangmanService.isLetterInWord(letter);
-    this.isHiddenWordFound = this.hangmanService.hiddenWordIsFound();
+    const isLetterInWord = this.hangmanService.isLetterInWord(letter);
+    const isHiddenWordFound = this.hangmanService.hiddenWordIsFound();
 
-    if (this.isHiddenWordFound) {
+    if (isHiddenWordFound) {
       this.router.navigateByUrl('result');
     }
 
-    if (!this.isLetterInWord) {
-      this.hangmanImagePath = `assets/GUESS_${this.try}.svg`;
+    if (!isLetterInWord) {
+      this.setImagePath();
     }
+  }
+
+  setImagePath(): void {
+    this.hangmanImagePath = `assets/GUESS_${this.tries}.svg`;
   }
 }

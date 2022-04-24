@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WordService } from 'src/app/services/word/word.service';
 import { HangmanService } from '../../services/hangman/hangman.service';
 
 @Component({
@@ -11,11 +12,16 @@ export class ResultComponent implements OnInit {
   word: string = '';
   tries: number = 0;
 
-  constructor(private hangmanService: HangmanService) {}
+  constructor(
+    private wordService: WordService,
+    private hangmanService: HangmanService
+  ) {}
 
   ngOnInit(): void {
     this.isWordFound = this.hangmanService.hiddenWordIsFound();
-    this.word = this.hangmanService.getWordAsString();
+    this.word = this.wordService.getWordAsString(
+      this.hangmanService.game.value.word
+    );
     this.tries = this.hangmanService.getTries();
   }
 }
