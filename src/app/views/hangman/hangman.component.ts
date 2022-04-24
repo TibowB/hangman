@@ -43,6 +43,11 @@ export class HangmanComponent implements OnInit, OnDestroy {
 
     const isLetterInWord = this.hangmanService.isLetterInWord(letter);
     const isHiddenWordFound = this.hangmanService.hiddenWordIsFound();
+    const isGameOver = this.hangmanService.isGameOver();
+
+    if (isGameOver) {
+      this.router.navigateByUrl('result');
+    }
 
     if (isHiddenWordFound) {
       this.router.navigateByUrl('result');

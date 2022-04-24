@@ -1,6 +1,9 @@
 <div class="result__container">
     <h2 class="result">
-        You found the word {{ word }} in {{ tries }} tries. Good job!
+        <span *ngIf="isWordFound; else NotFound">
+            You found the word {{ word }}. Good job!
+        </span>
+        <ng-template #NotFound>Oh no ! You didn't find the word {{ word }}. Try again!</ng-template>
     </h2>
     <app-button routerLink="/">Play Again</app-button>
 </div>

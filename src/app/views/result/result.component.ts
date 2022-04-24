@@ -18,10 +18,9 @@ export class ResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isWordFound = this.hangmanService.hiddenWordIsFound();
+    this.isWordFound = this.hangmanService.game.value.isWordFound;
     this.word = this.wordService.getWordAsString(
       this.hangmanService.game.value.word
     );
-    this.tries = this.hangmanService.getTries();
   }
 }
