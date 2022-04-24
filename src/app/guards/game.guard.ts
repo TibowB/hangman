@@ -12,9 +12,8 @@ import { HangmanService } from '../services/hangman/hangman.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class GameGuard implements CanActivate {
   constructor(private hangmanService: HangmanService, private router: Router) {}
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -23,10 +22,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.hangmanService.game.value.word.length !== 0) {
-      return true;
+    const wordLength = this.hangmanService.game.value.word.length;
+
+    if (wordLength === 0) {
+      return this.router.navigate(['']);
     }
 
-    return this.router.navigateByUrl('');
+    return true;
   }
 }
