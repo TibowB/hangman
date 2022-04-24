@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { AlphabetService } from '../alphabet/alphabet.service';
 import { WordService } from '../word/word.service';
 import { Game } from '../../types/Game';
-import { IHangmanService } from 'src/app/interfaces/IHangmanService';
+import { Hangman } from '../../interfaces/hangman.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HangmanService implements IHangmanService {
+export class HangmanService implements Hangman {
   public game: BehaviorSubject<Game> = new BehaviorSubject<Game>({
     word: [],
     hiddenWord: [],

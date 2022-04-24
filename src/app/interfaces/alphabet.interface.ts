@@ -1,4 +1,4 @@
-export interface IAlplhabetService {
+export interface Alphabet {
   alphabet: string;
   getAlphabet(): string[];
 }

@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Game } from '../types/Game';
 
-export interface IHangmanService {
+export interface Hangman {
   game: BehaviorSubject<Game>;
 
   prepareGame(): void;
