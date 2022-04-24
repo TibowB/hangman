@@ -33,8 +33,13 @@ export class HangmanService implements Hangman {
 
   isLetterInWord(letter: string): boolean {
     if (this.game.value.word.includes(letter)) {
-      const letterIndex = this.game.value.word.indexOf(letter);
-      this.game.value.hiddenWord[letterIndex] = letter;
+      let indexes: number[] = [];
+      let index = this.game.value.word.indexOf(letter);
+      while (index != -1) {
+        indexes.push(index);
+        index = this.game.value.word.indexOf(letter, index + 1);
+      }
+      indexes.forEach((index) => (this.game.value.hiddenWord[index] = letter));
       this.game.next({
         word: this.game.value.word,
         hiddenWord: this.game.value.hiddenWord,
