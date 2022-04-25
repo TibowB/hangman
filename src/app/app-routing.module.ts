@@ -5,7 +5,7 @@ import { HangmanComponent } from './views/hangman/hangman.component';
 import { GameGuard } from './guards/game.guard';
 import { ResultComponent } from './views/result/result.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'hangman', canActivate: [GameGuard], component: HangmanComponent },
   { path: 'result', canActivate: [GameGuard], component: ResultComponent },
