@@ -22,20 +22,18 @@ describe('HangmanService', () => {
     });
   });
 
-  it('should return false from isGameOver() if tries is not equal to 11, otherwise it returns true', () => {
-    // Tries = 0
-    expect(service.isGameOver()).toBeFalse();
-
-    // Tries = 10
+  it('should return false from isGameOver() if tries is not equal to 11', () => {
     service.game.next({
       word: [],
       hiddenWord: [],
       tries: 10,
       isWordFound: false,
     });
-    expect(service.isGameOver()).toBeFalse();
 
-    // Tries = 11
+    expect(service.isGameOver()).toBeFalse();
+  });
+
+  it('should return true from isGameOver() if tries is equal to 11', () => {
     service.game.next({
       word: [],
       hiddenWord: [],
@@ -45,17 +43,7 @@ describe('HangmanService', () => {
     expect(service.isGameOver()).toBeTrue();
   });
 
-  it('should return true from hiddenWordIsFound() if word and hiddenWord are equals, otherwise it returns false', () => {
-    // Word !== HiddenWord
-    service.game.next({
-      word: ['F', 'O', 'O'],
-      hiddenWord: ['_', '_', '_'],
-      tries: 0,
-      isWordFound: false,
-    });
-    expect(service.hiddenWordIsFound()).toBeFalse();
-
-    // Word === HiddenWord
+  it('should return true from hiddenWordIsFound() if word and hiddenWord are equals', () => {
     service.game.next({
       word: ['F', 'O', 'O'],
       hiddenWord: ['F', 'O', 'O'],
@@ -65,7 +53,17 @@ describe('HangmanService', () => {
     expect(service.hiddenWordIsFound()).toBeTrue();
   });
 
-  it('should return true and update the hiddenWord if a submited letter is the word, otherwise it returns false', () => {
+  it('should return false from hiddenWordIsFound() if word and hiddenWord are not equals', () => {
+    service.game.next({
+      word: ['F', 'O', 'O'],
+      hiddenWord: ['_', '_', '_'],
+      tries: 0,
+      isWordFound: false,
+    });
+    expect(service.hiddenWordIsFound()).toBeFalse();
+  });
+
+  it('should return true if a submited letter is in the word', () => {
     service.game.next({
       word: ['F', 'O', 'O'],
       hiddenWord: ['_', '_', '_'],
@@ -74,9 +72,35 @@ describe('HangmanService', () => {
     });
 
     expect(service.isLetterInWord('O')).toBeTrue();
-    expect(service.game.value.hiddenWord).toEqual(['_', 'O', 'O']);
+  });
+
+  it('should return false if a submited letter is not in the word', () => {
+    service.game.next({
+      word: ['F', 'O', 'O'],
+      hiddenWord: ['_', '_', '_'],
+      tries: 0,
+      isWordFound: true,
+    });
 
     expect(service.isLetterInWord('B')).toBeFalse();
+  });
+
+  it('should handle letter submission and update the game object', () => {
+    service.game.next({
+      word: ['F', 'O', 'O'],
+      hiddenWord: ['_', '_', '_'],
+      tries: 0,
+      isWordFound: true,
+    });
+
+    service.handleLetterSubmission('O');
+
     expect(service.game.value.hiddenWord).toEqual(['_', 'O', 'O']);
+    expect(service.game.value.tries).toEqual(0);
+
+    service.handleLetterSubmission('B');
+
+    expect(service.game.value.hiddenWord).toEqual(['_', 'O', 'O']);
+    expect(service.game.value.tries).toEqual(1);
   });
 });
