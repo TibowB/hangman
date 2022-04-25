@@ -35,11 +35,12 @@ export class HangmanComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {}
 
   onClickSubmitLetter(event: Event, letter: string) {
-    // this.hiddenWord = this.hangmanService.hiddenWord.value;
     (event.target as HTMLElement).classList.replace(
       'letter',
       'letter--clicked'
     );
+
+    this.hangmanService.handleLetterSubmission(letter);
 
     const isLetterInWord = this.hangmanService.isLetterInWord(letter);
     const isHiddenWordFound = this.hangmanService.hiddenWordIsFound();
