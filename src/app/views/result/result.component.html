@@ -3,7 +3,7 @@
         <span *ngIf="isWordFound; else NotFound">
             You found the word {{ word }}. Good job!
         </span>
-        <ng-template #NotFound>Oh no ! You didn't find the word {{ word }}. Try again!</ng-template>
+        <ng-template #NotFound>Oh no ! You didn't find the word {{ word }}.</ng-template>
     </h2>
     <app-button routerLink="/">Play Again</app-button>
 </div>
