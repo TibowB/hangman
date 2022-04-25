@@ -40,7 +40,7 @@ export class HangmanService implements Hangman {
     return this.game.value.word.includes(letter);
   }
 
-  updateHiddenWord(letter: string) {
+  updateHiddenWord(letter: string): void {
     const indexes: number[] = [];
     let index = this.game.value.word.indexOf(letter);
     while (index != -1) {
@@ -52,7 +52,7 @@ export class HangmanService implements Hangman {
     });
   }
 
-  updateGameTries(increment: boolean) {
+  updateGameTries(increment: boolean): void {
     this.game.next({
       word: this.game.value.word,
       hiddenWord: this.game.value.hiddenWord,

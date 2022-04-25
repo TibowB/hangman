@@ -8,7 +8,15 @@ export interface Hangman {
 
   getTries(): number;
 
+  handleLetterSubmission(letter: string): void;
+
   isLetterInWord(letter: string): boolean;
 
+  updateHiddenWord(letter: string): void;
+
+  updateGameTries(increment: boolean): void;
+
   hiddenWordIsFound(): boolean;
+
+  isGameOver(): boolean;
 }
