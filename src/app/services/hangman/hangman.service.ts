@@ -31,30 +31,34 @@ export class HangmanService implements Hangman {
     return this.game.value.tries;
   }
 
+  handleLetterSubmission(letter: string): void {
+    this.updateHiddenWord(letter);
+    this.updateGameTries(this.isLetterInWord(letter));
+  }
+
   isLetterInWord(letter: string): boolean {
-    if (this.game.value.word.includes(letter)) {
-      let indexes: number[] = [];
-      let index = this.game.value.word.indexOf(letter);
-      while (index != -1) {
-        indexes.push(index);
-        index = this.game.value.word.indexOf(letter, index + 1);
-      }
-      indexes.forEach((index) => (this.game.value.hiddenWord[index] = letter));
-      this.game.next({
-        word: this.game.value.word,
-        hiddenWord: this.game.value.hiddenWord,
-        tries: this.game.value.tries,
-        isWordFound: this.hiddenWordIsFound(),
-      });
-      return true;
+    return this.game.value.word.includes(letter);
+  }
+
+  updateHiddenWord(letter: string) {
+    const indexes: number[] = [];
+    let index = this.game.value.word.indexOf(letter);
+    while (index != -1) {
+      indexes.push(index);
+      index = this.game.value.word.indexOf(letter, index + 1);
     }
+    indexes.forEach((index) => {
+      this.game.value.hiddenWord[index] = letter;
+    });
+  }
+
+  updateGameTries(increment: boolean) {
     this.game.next({
       word: this.game.value.word,
       hiddenWord: this.game.value.hiddenWord,
-      tries: this.game.value.tries + 1,
+      tries: increment ? this.game.value.tries : this.game.value.tries + 1,
       isWordFound: this.hiddenWordIsFound(),
     });
-    return false;
   }
 
   hiddenWordIsFound(): boolean {
