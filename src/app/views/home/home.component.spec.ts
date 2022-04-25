@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+} from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,33 +42,24 @@ describe('HomeComponent', () => {
   it('should call the method onClickStartGameOnePlayer() when we click on the button "OnePlayer"', fakeAsync(() => {
     spyOn(component, 'onClickStartGameOnePlayer');
 
-    fixture.detectChanges();
     const onePlayerButton = fixture.debugElement.nativeElement.querySelector(
       'app-button:first-of-type'
     );
 
     onePlayerButton.click();
-    fixture.detectChanges();
 
-    fixture.whenStable().then(() => {
-      expect(component.onClickStartGameOnePlayer).toHaveBeenCalled();
-    });
+    expect(component.onClickStartGameOnePlayer).toHaveBeenCalled();
   }));
 
   it('should call the method onClickStartGameTwoPlayer() when we click on the button "TwoPlayer"', fakeAsync(() => {
     spyOn(component, 'onClickStartGameTwoPlayer');
-
-    fixture.detectChanges();
 
     const twoPlayerButton = fixture.debugElement.nativeElement.querySelector(
       'app-button:last-of-type'
     );
 
     twoPlayerButton.click();
-    fixture.detectChanges();
 
-    fixture.whenStable().then(() => {
-      expect(component.onClickStartGameTwoPlayer).toHaveBeenCalled();
-    });
+    expect(component.onClickStartGameTwoPlayer).toHaveBeenCalled();
   }));
 });
