@@ -5,5 +5,5 @@
         </span>
         <ng-template #NotFound>Oh no ! You didn't find the word {{ word }}.</ng-template>
     </h2>
-    <app-button routerLink="/">Play Again</app-button>
+    <app-button (click)="onClickPlayAgain()">Play Again</app-button>
 </div>

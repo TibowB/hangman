@@ -12,10 +12,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onClickStartGameOnePlayer() {
+  onClickStartGame() {
     this.hangmanService.prepareGame();
     this.router.navigate(['hangman']);
   }
-
-  onClickStartGameTwoPlayer() {}
 }

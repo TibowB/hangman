@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WordService } from 'src/app/services/word/word.service';
 import { HangmanService } from '../../services/hangman/hangman.service';
 
@@ -14,7 +15,8 @@ export class ResultComponent implements OnInit {
 
   constructor(
     private wordService: WordService,
-    private hangmanService: HangmanService
+    private hangmanService: HangmanService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -22,5 +24,10 @@ export class ResultComponent implements OnInit {
     this.word = this.wordService.getWordAsString(
       this.hangmanService.game.value.word
     );
+  }
+
+  onClickPlayAgain() {
+    this.hangmanService.prepareGame();
+    this.router.navigate(['hangman']);
   }
 }

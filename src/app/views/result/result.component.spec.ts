@@ -1,8 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 
 import { ResultComponent } from './result.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from 'src/app/components/button/button.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ResultComponent', () => {
   let component: ResultComponent;
@@ -10,7 +11,7 @@ describe('ResultComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, RouterTestingModule],
       declarations: [ResultComponent, ButtonComponent],
     }).compileComponents();
   });
@@ -21,7 +22,14 @@ describe('ResultComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  it('should call the method onClickPlayAgain() when we click on the button "Play Again"', fakeAsync(() => {
+    spyOn(component, 'onClickPlayAgain');
+
+    const onePlayerButton =
+      fixture.debugElement.nativeElement.querySelector('app-button');
+
+    onePlayerButton.click();
+
+    expect(component.onClickPlayAgain).toHaveBeenCalled();
+  }));
 });
